@@ -10,8 +10,34 @@
     <meta name="description" content="Placeholder" />
     <link rel="stylesheet" href="./pages/index.css" />
     <link rel="shortcut icon" href="favicon.ico" />
-    <!--Add Title-->
-    <title>Placeholder</title>
+    <title>Around the U.S.</title>
   </head>
-  <body></body>
+  <body class="page">
+    <div class="page__content">
+      <header class="header page__section">
+        <img
+          src="./images/logo.svg"
+          alt="Around the U.S logo"
+          class="header__logo"
+        />
+      </header>
+      <main class="content">
+        <section class="profile page__section">
+          <img
+            src="./images/jacques-cousteau.png"
+            alt="Jacques Cousteau avatar"
+            class="profile__avatar"
+          />
+          <div class="profile__info">
+            <h1 class="profile__title">Jacques Cousteau</h1>
+            <button class="profile__edit-button"></button>
+            <p class="profile__description">Explorer</p>
+          </div>
+          <button class="profile__add-button"></button>
+        </section>
+        <section class="cards page__section"></section>
+      </main>
+      <footer class="footer page__section"></footer>
+    </div>
+  </body>
 </html>
