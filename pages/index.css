@@ -120,6 +120,12 @@
   margin: 0;
 }
 
+.card__label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .card__description {
   display: flex;
   align-items: center;
@@ -146,12 +152,6 @@
   background: transparent url(../images/Heart-Button.svg) center no-repeat;
   border: none;
   padding: 0;
-}
-
-.card__label {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
 }
 
 .footer__copyright {
