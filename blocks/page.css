@@ -1,1 +1,21 @@
+.page {
+  font-family: Inter;
+  background-color: black;
+  color: white;
+  max-width: calc(100% - 34px);
+}
 
+.page__content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.page__section {
+  max-width: 880px;
+  width: 100%;
+  margin: 0 auto;
+  position: relative;
+  padding-left: 17px;
+  padding-right: 17px;
+}
