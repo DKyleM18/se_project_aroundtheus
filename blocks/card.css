@@ -1,0 +1,46 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  list-style: none;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.card__image {
+  width: 282px;
+  height: 282px;
+  padding: 0;
+  margin: 0;
+}
+
+.card__description {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 25px 20px;
+  background-color: #fff;
+  color: black;
+}
+
+.card__title {
+  margin: 0;
+  font-weight: 900;
+  font-size: 24px;
+  line-height: 29px;
+  max-width: 219px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.card__heart-button {
+  width: 21px;
+  height: 18px;
+  background: transparent url(../images/Heart-Button.svg) center no-repeat;
+  border: none;
+  padding: 0;
+}
+
+.card__heart-button:hover {
+  opacity: 50%;
+}
