@@ -39,6 +39,7 @@
   background: transparent url(../images/Heart-Button.svg) center no-repeat;
   border: none;
   padding: 0;
+  cursor: pointer;
 }
 
 .card__heart-button:hover {

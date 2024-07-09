@@ -25,4 +25,4 @@ This is the starting point of a project website that will give users the ability
 
 **Link to video**
 
-https://drive.google.com/file/d/1lBmKmPyqVIIoEViavkOU0DhkghZ8RoqR/view?usp=drive_link
+https://drive.google.com/file/d/1lBmKmPyqVIIoEViavkOU0DhkghZ8RoqR/view?usp=sharing
