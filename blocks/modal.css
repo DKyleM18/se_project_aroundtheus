@@ -5,17 +5,17 @@
   right: 0;
   position: fixed;
   z-index: 999;
-  display: flex;
+  display: none;
   align-items: center;
   justify-content: center;
   background-color: rgba(0, 0, 0, 0.5);
   padding: 19px;
-  /* display: none; */
   color: #000;
+  display: none;
 }
 
 .modal__opened {
-  /* display: flex; */
+  display: flex;
 }
 
 .modal__container {
