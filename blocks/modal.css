@@ -11,11 +11,12 @@
   background-color: rgba(0, 0, 0, 0.5);
   padding: 19px;
   color: #000;
-  display: none;
+  display: flex;
+  visibility: hidden;
 }
 
 .modal__opened {
-  display: flex;
+  visibility: visible;
 }
 
 .modal__container {
