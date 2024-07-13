@@ -31,10 +31,18 @@
           />
           <div class="profile__info">
             <h1 class="profile__title">Jacques Cousteau</h1>
-            <button type="button" class="profile__edit-button"></button>
+            <button
+              aria-label="edit button"
+              type="button"
+              class="profile__edit-button"
+            ></button>
             <p class="profile__description">Explorer</p>
           </div>
-          <button type="button" class="profile__add-button"></button>
+          <button
+            aria-label="add button"
+            type="button"
+            class="profile__add-button"
+          ></button>
         </section>
         <section class="cards page__section">
           <ul class="cards__list"></ul>
@@ -46,8 +54,8 @@
     </div>
     <div class="modal">
       <div class="modal__container">
-        <button class="modal__close"></button>
-        <p class="modal__heading">Edit Profile</p>
+        <button aria-label="close" class="modal__close"></button>
+        <h3 class="modal__heading">Edit Profile</h3>
         <form class="modal__form">
           <input
             class="modal__form-input"
@@ -72,7 +80,11 @@
         <img src="" alt="" class="card__image" />
         <div class="card__description">
           <h2 class="card__title"></h2>
-          <button type="button" class="card__heart-button"></button>
+          <button
+            aria-label="heart button"
+            type="button"
+            class="card__heart-button"
+          ></button>
         </div>
       </li>
     </template>

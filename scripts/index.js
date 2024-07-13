@@ -43,7 +43,7 @@ const cardlistEl = document.querySelector(".cards__list");
 // FUNCTIONS
 
 function toggleModal() {
-  modal.classList.toggle("modal__opened");
+  modal.classList.toggle("modal-toggled");
 }
 
 function getCardElement(cardData) {
