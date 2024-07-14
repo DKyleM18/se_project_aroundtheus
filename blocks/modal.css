@@ -15,7 +15,7 @@
   visibility: hidden;
 }
 
-.modal-toggled {
+.modal_opened {
   visibility: visible;
 }
 
