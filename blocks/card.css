@@ -4,6 +4,7 @@
   list-style: none;
   border-radius: 10px;
   overflow: hidden;
+  position: relative;
 }
 
 .card__image {
@@ -33,6 +34,21 @@
   overflow: hidden;
 }
 
+.card__delete-button {
+  width: 18px;
+  height: 19px;
+  background: transparent url(../images/Trash.svg) center no-repeat;
+  border: none;
+  position: absolute;
+  left: 250px;
+  top: 18px;
+  transition: opacity 0.2s;
+}
+
+.card__delete-button:hover {
+  opacity: 0.6;
+}
+
 .card__heart-button {
   width: 21px;
   height: 18px;
@@ -40,8 +56,13 @@
   border: none;
   padding: 0;
   cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.card__heart-button-active {
+  background-image: url(../images/Heart-button-active.svg);
 }
 
 .card__heart-button:hover {
-  opacity: 50%;
+  opacity: 0.5;
 }

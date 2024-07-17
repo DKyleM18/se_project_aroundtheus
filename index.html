@@ -52,11 +52,12 @@
         <p class="footer__copyright">© 2022 Around The U.S.</p>
       </footer>
     </div>
-    <div class="modal">
+    <!-- Edit Profile Modal -->
+    <div class="modal" id="profile-modal">
       <div class="modal__container">
         <button aria-label="close" class="modal__close"></button>
         <h3 class="modal__heading">Edit Profile</h3>
-        <form class="modal__form">
+        <form class="modal__form" id="edit-profile-form">
           <input
             class="modal__form-input"
             id="profile-title-input"
@@ -75,9 +76,38 @@
         </form>
       </div>
     </div>
+    <!-- Add Card Modal -->
+    <div class="modal" id="add-card-modal">
+      <div class="modal__container">
+        <button aria-label="close" class="modal__close"></button>
+        <h3 class="modal__heading">New Place</h3>
+        <form class="modal__form" id="add-card-form">
+          <input
+            class="modal__form-input"
+            id="add-card-title-input"
+            type="text"
+            name="title"
+            placeholder="Title"
+          />
+          <input
+            class="modal__form-input"
+            id="add-card-url-input"
+            type="text"
+            name="Image URL"
+            placeholder="Image link"
+          />
+          <button class="modal__button" type="submit">Create</button>
+        </form>
+      </div>
+    </div>
     <template id="card-template">
       <li class="card">
         <img src="" alt="" class="card__image" />
+        <button
+          class="card__delete-button"
+          aria-label="delete button"
+          type="button"
+        ></button>
         <div class="card__description">
           <h2 class="card__title"></h2>
           <button
