@@ -13,9 +13,13 @@
   color: #000;
   display: flex;
   visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s linear 0.5s, opacity 0.5s linear;
 }
 
 .modal_opened {
+  opacity: 1;
+  transition-delay: 0s;
   visibility: visible;
 }
 
@@ -99,6 +103,21 @@
   opacity: 0.6;
 }
 
+.modal__image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+
+.modal__image-title {
+  color: #fff;
+  font-size: 12px;
+  line-height: 15px;
+}
+
+.modal__preview_container {
+  position: relative;
+}
+
 @media screen and (max-width: 632px) {
   .modal__container {
     width: 282px;
@@ -124,5 +143,12 @@
     width: 26px;
     top: -40px;
     right: 0;
+  }
+
+  .modal__close-preview {
+    height: 30px;
+    width: 30px;
+    top: -32px;
+    right: -32px;
   }
 }
