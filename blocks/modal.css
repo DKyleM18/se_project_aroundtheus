@@ -54,39 +54,34 @@
   font-size: 14px;
   line-height: 17px;
   height: 27px;
-  margin-bottom: 30px;
   padding: 0;
 }
 
 .modal__form-input:valid {
   border-bottom: 1px solid green;
-  outline: none;
 }
 
 .modal__form-input:invalid {
   border-bottom: 1px solid red;
 }
 
-.modal__form-input:last-of-type {
-  margin-bottom: 0;
-}
-
 .modal__form-input-error {
-}
-
-.modal__form-input-error_active {
-  /* opacity: 1; */
+  height: 30px;
+  max-height: 30px;
   color: red;
   font-size: 12px;
   line-height: 14px;
 }
+
+/* .modal__form-input-error_active {
+} */
 
 .modal__button {
   padding: 0;
   height: 50px;
   width: 358px;
   align-self: center;
-  margin-top: 48px;
+  margin-top: 18px;
   background-color: black;
   color: #fff;
   font-size: 18px;
