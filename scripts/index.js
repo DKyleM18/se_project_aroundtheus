@@ -68,10 +68,14 @@ const cardlistEl = document.querySelector(".cards__list");
 
 function closeModal(modal) {
   modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscape);
+  modal.removeEventListener("click", handleModalClickOut);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscape);
+  modal.addEventListener("click", handleModalClickOut);
 }
 
 function getCardElement(cardData) {
@@ -125,38 +129,32 @@ function handleAddCardFormSubmit(evt) {
   const name = addCardTitleInput.value;
   const link = addCardUrlInput.value;
   renderCard({ name, link }, cardlistEl);
+  evt.target.reset();
   closeModal(addCardModal);
 }
 
-// EVENT LISTENERS
+function handleModalCloseButton() {
+  const closeButtons = document.querySelectorAll(".modal__close");
+  closeButtons.forEach((button) => {
+    const popup = button.closest(".modal");
+    button.addEventListener("click", () => closeModal(popup));
+  });
+}
 
-document.addEventListener("mousedown", (evt) => {
-  if (!evt.target.classList.contains("modal__element")) {
-    closeModal(addCardModal);
-    closeModal(profileModal);
-    closeModal(previewImageModal);
+function handleModalClickOut(evt) {
+  if (evt.currentTarget === evt.target) {
+    closeModal(evt.target);
   }
-});
+}
 
-document.addEventListener("keydown", (evt) => {
+function handleEscape(evt) {
   if (evt.key === "Escape") {
-    closeModal(addCardModal);
-    closeModal(profileModal);
-    closeModal(previewImageModal);
+    const openedModal = document.querySelector(".modal_opened");
+    closeModal(openedModal);
   }
-});
+}
 
-profileModalCloseButton.addEventListener("click", () =>
-  closeModal(profileModal)
-);
-
-addCardModalCloseButton.addEventListener("click", () =>
-  closeModal(addCardModal)
-);
-
-previewImageModalCloseButton.addEventListener("click", () =>
-  closeModal(previewImageModal)
-);
+// EVENT LISTENERS
 
 addCardButton.addEventListener("click", () => openModal(addCardModal));
 
@@ -173,6 +171,6 @@ addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 initialCards.forEach((cardData) => renderCard(cardData, cardlistEl));
 
-const likeButtons = document.querySelectorAll(".card__heart-button");
+// Calls
 
-// likeButtons.forEach(likeButton) => {};
+handleModalCloseButton();
