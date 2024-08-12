@@ -34,6 +34,13 @@
   width: 430px;
 }
 
+.modal__container_type_preview {
+  padding: 0;
+  border-radius: 0;
+  background-color: unset;
+  width: unset;
+}
+
 .modal__heading {
   font-size: 24px;
   line-height: 29px;
@@ -72,9 +79,6 @@
   font-size: 12px;
   line-height: 14px;
 }
-
-/* .modal__form-input-error_active {
-} */
 
 .modal__button {
   padding: 0;
@@ -140,10 +144,6 @@
   line-height: 15px;
 }
 
-.modal__preview_container {
-  position: relative;
-}
-
 @media screen and (max-width: 632px) {
   .modal__container {
     width: 282px;
@@ -171,7 +171,7 @@
     right: 0;
   }
 
-  .modal__close-preview {
+  .modal__close_type_preview {
     height: 30px;
     width: 30px;
     top: -32px;
