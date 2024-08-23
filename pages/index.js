@@ -102,7 +102,6 @@ function handleProfileFormSubmit(evt) {
   evt.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  // profileSubmitButton.disabled = true;
   closeModal(profileModal);
 }
 
@@ -112,8 +111,7 @@ function handleAddCardFormSubmit(evt) {
   const link = addCardUrlInput.value;
   renderCard({ name, link }, cardListEl);
   evt.target.reset();
-  addCardSubmitButton.disabled = true;
-  // addCardSubmitButton.classList.add(".modal__button_disabled");
+  addCardFormValidator.resetValidation();
   closeModal(addCardModal);
 }
 
@@ -142,7 +140,6 @@ function handleEscape(evt) {
 
 addCardButton.addEventListener("click", () => {
   openModal(addCardModal);
-  addCardFormValidator.resetValidation();
 });
 
 profileEditButton.addEventListener("click", function () {
@@ -153,6 +150,7 @@ profileEditButton.addEventListener("click", function () {
 });
 
 profileForm.addEventListener("submit", handleProfileFormSubmit);
+
 addCardForm.addEventListener("submit", handleAddCardFormSubmit);
 
 // MISC
