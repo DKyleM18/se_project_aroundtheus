@@ -4,6 +4,8 @@ export default class Card {
     this._link = data.link;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+
+    // this._heartButton = this._cardElement.querySelector(".card__heart-button");
   }
 
   _handleLikeIcons() {
