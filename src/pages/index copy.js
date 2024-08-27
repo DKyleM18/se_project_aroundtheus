@@ -6,10 +6,6 @@ import FormValidator from "../components/FormValidator.js";
 
 import Card from "../components/Card.js";
 
-import PopupWithImage from "../components/PopupWithImage.js";
-
-import PopupWithForm from "../components/PopupWithForm.js";
-
 // Profile
 
 const profile = document.querySelector(".profile");
@@ -150,24 +146,3 @@ const profileFormValidator = new FormValidator(validationSettings, profileForm);
 addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
 handleModalCloseButton();
-
-// NEW
-
-const imageModal = new PopupWithImage("#image-modal");
-imageModal.setEventListeners();
-
-const cardModal = new PopupWithForm(
-  "#add-card-modal",
-  (handleFormSubmit = () => {
-    //
-  })
-);
-cardModal.setEventListeners();
-
-const infoModal = new PopupWithForm(
-  "#profile-modal",
-  (handleFormSubmit = () => {
-    //
-  })
-);
-infoModal.setEventListeners();
