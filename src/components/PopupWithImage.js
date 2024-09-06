@@ -5,12 +5,14 @@ export default class PopupWithImage extends Popup {
     super(popupSelector);
   }
 
-  open(data) {
-    // set the image's src and alt
-    this.popupSelector.querySelector(".card__image").src = data.link;
-    this.popupSelector.querySelector(".card__image").alt = data.name;
-    // set the caption's textContent
-    this.popupSelector.querySelector(".card__title").textContent = data.name;
+  open({ link, name }) {
+    const imageEl = this.popupSelector.querySelector(".card__image");
+    const titleEl = this.popupSelector.querySelector(".card__title");
+
+    imageEl.src = link;
+    imageEl.alt = name;
+    titleEl.textContent = name;
+
     super.open();
   }
 }
