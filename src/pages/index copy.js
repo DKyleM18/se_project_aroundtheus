@@ -67,10 +67,10 @@ const cardListEl = document.querySelector(".cards__list");
 //   cardListEl.prepend(createCard(cardData));
 // }
 
-function createCard(cardData) {
-  const cardElement = new Card(cardData, "#card-template", handleImageClick);
-  return cardElement.getView();
-}
+// function createCard(cardData) {
+//   const cardElement = new Card(cardData, "#card-template", handleImageClick);
+//   return cardElement.getView();
+// }
 
 // initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
 
