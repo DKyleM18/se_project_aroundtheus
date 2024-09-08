@@ -48,11 +48,11 @@ section.renderItems();
 
 // Image Modal
 
-const imageModal = new PopupWithImage("#image-modal");
+const imageModal = new PopupWithImage({ popupSelector: "#image-modal" });
 imageModal.setEventListeners();
 
 function handleImageClick(cardData) {
-  imageModal.open(cardData);
+  imageModal.open();
 }
 
 // Add Card Modal
@@ -66,7 +66,9 @@ function handleAddCardFormSubmit(data) {
 }
 
 const addCardModal = new PopupWithForm(
-  "#add-card-modal",
+  {
+    popupSelector: "#add-card-modal",
+  },
   handleAddCardFormSubmit
 );
 addCardModal.setEventListeners();
@@ -79,7 +81,9 @@ function handleProfileFormSubmit(data) {
 }
 
 const profileModal = new PopupWithForm(
-  "#profile-modal",
+  {
+    popupSelector: "#profile-modal",
+  },
   handleProfileFormSubmit
 );
 profileModal.setEventListeners();
