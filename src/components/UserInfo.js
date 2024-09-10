@@ -1,8 +1,8 @@
 export default class UserInfo {
-  constructor(titleSelector, descriptionSelector) {
+  constructor(titleElement, descriptionElement) {
     //
-    this._titleElement = titleSelector;
-    this._descriptionElement = descriptionSelector;
+    this._titleElement = titleElement;
+    this._descriptionElement = descriptionElement;
   }
 
   getUserInfo() {

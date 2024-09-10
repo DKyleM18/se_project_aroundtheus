@@ -68,16 +68,15 @@ function handleImageClick(cardData) {
 }
 
 function handleAddCardFormSubmit(inputData) {
-  // console.log("inputData:", inputData);
   const cardData = {
     name: inputData.title,
     link: inputData["Image URL"],
   };
-  // console.log(cardData);
 
   createCard(cardData);
   newCardModal.close();
   addCardForm.reset();
+  addCardFormValidator.disableSubmitButton();
 }
 
 function handleProfileFormSubmit(userData) {
@@ -95,6 +94,7 @@ profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
   nameInput.value = userData.title;
   descriptionInput.value = userData.description;
+  profileFormValidator.resetValidation();
   profileModal.open();
 });
 
@@ -104,13 +104,10 @@ addCardButton.addEventListener("click", () => {
 
 // Validation
 
-const addCardFormValidator = new FormValidator(
-  validationSettings,
-  document.forms["add-card-form"]
-);
+const addCardFormValidator = new FormValidator(validationSettings, addCardForm);
 const profileFormValidator = new FormValidator(
   validationSettings,
-  document.forms["edit-profile-form"]
+  editProfileForm
 );
 
 addCardFormValidator.enableValidation();
