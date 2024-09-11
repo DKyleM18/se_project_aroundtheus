@@ -1,3 +1,5 @@
+// TOKEN : "71ef8ca1-b8c8-47e5-8d73-d71542ab18e9"
+
 import "../pages/index.css";
 
 import { initialCards, validationSettings } from "../utils/constants.js";
@@ -13,6 +15,8 @@ import PopupWithForm from "../components/PopupWithForm.js";
 import UserInfo from "../components/UserInfo.js";
 
 import Section from "../components/Section.js";
+
+import Api from "../components/Api.js";
 
 // Containers
 
@@ -136,3 +140,13 @@ const profileModal = new PopupWithForm(
 );
 
 profileModal.setEventListeners();
+
+// Api
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "71ef8ca1-b8c8-47e5-8d73-d71542ab18e9",
+    "Content-Type": "application/json",
+  },
+});
