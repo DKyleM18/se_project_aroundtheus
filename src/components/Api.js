@@ -14,8 +14,73 @@ export default class Api {
       .then((res) => res);
   }
 
+  editUserInfo(name, about) {
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: name,
+        about: about,
+      }),
+    })
+      .then(this._checkResponse)
+      .then((res) => res);
+  }
+
+  editUserAvatar(data) {
+    return fetch(`${this._baseUrl}/users/me/avatar`, {
+      method: "PATCH",
+      headers: this._headers,
+      body: JSON.stringify({
+        avatar: data.link,
+      }),
+    })
+      .then(this._checkResponse)
+      .then((res) => res);
+  }
+
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+      .then((res) => res);
+  }
+
+  addNewCard(data) {
+    return fetch(`${this._baseUrl}/cards`, {
+      method: "POST",
+      headers: this._headers,
+      body: JSON.stringify({
+        name: data.title,
+        link: data.link,
+      }),
+    })
+      .then(this._checkResponse)
+      .then((res) => res);
+  }
+
+  deleteCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}`, {
+      method: "DELETE",
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+      .then((res) => res);
+  }
+
+  likeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "PUT",
+      headers: this._headers,
+    })
+      .then(this._checkResponse)
+      .then((res) => res);
+  }
+
+  dislikeCard(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: "DELETE",
       headers: this._headers,
     })
       .then(this._checkResponse)

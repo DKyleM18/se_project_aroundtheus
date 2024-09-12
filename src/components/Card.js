@@ -21,10 +21,7 @@ export default class Card {
     this._heartButton.classList.toggle("card__heart-button-active");
   }
 
-  _handleDeleteButton() {
-    this._cardElement.remove();
-    this._cardElement = null;
-  }
+  _handleDeleteButton() {}
 
   _setEventListeners() {
     this._heartButton.addEventListener("click", () => {

@@ -29,12 +29,15 @@ const addCardForm = document.forms["add-card-form"];
 // Buttons
 
 const addCardButton = document.querySelector(".profile__add-button");
+const addCardSaveButton = addCardModal.querySelector(".modal__button");
 const profileEditButton = document.querySelector(".profile__edit-button");
+const profileSaveButton = editProfileModal.querySelector(".modal__button");
 
 // Misc
 
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
+const profileAvatar = document.querySelector(".profile__avatar");
 
 // Inputs
 
@@ -42,6 +45,16 @@ const nameInput = editProfileModal.querySelector("#profile-title-input");
 const descriptionInput = editProfileModal.querySelector(
   "#profile-description-input"
 );
+
+// Api
+
+const api = new Api({
+  baseUrl: "https://around-api.en.tripleten-services.com/v1",
+  headers: {
+    authorization: "71ef8ca1-b8c8-47e5-8d73-d71542ab18e9",
+    "Content-Type": "application/json",
+  },
+});
 
 // Cards
 
@@ -71,6 +84,8 @@ function handleImageClick(cardData) {
   imageModal.open(cardData);
 }
 
+// function handleDeleteCardSubmit(cardData) {}
+
 function handleAddCardFormSubmit(inputData) {
   const cardData = {
     name: inputData.title,
@@ -84,13 +99,30 @@ function handleAddCardFormSubmit(inputData) {
 }
 
 function handleProfileFormSubmit(userData) {
+  profileSaveButton.textContent = "Saving...";
   const title = userData.title;
   const description = userData.description;
-  userInfo.setUserInfo(title, description);
-  profileModal.close();
+  api.editUserInfo(title, description);
+  setTimeout(() => {
+    getProfileData();
+    profileModal.close();
+    profileSaveButton.textContent = "Save";
+  }, 1000);
 }
 
-const userInfo = new UserInfo(profileTitle, profileDescription);
+function getProfileData() {
+  return api.getUserInfo().then((profileData) => {
+    userInfo.setUserInfo(
+      profileData["name"],
+      profileData["about"],
+      profileData["avatar"]
+    );
+  });
+}
+
+getProfileData();
+
+const userInfo = new UserInfo(profileTitle, profileDescription, profileAvatar);
 
 // Event Listeners
 
@@ -141,12 +173,9 @@ const profileModal = new PopupWithForm(
 
 profileModal.setEventListeners();
 
-// Api
+const deleteModal = new PopupWithForm(
+  "#delete-card-modal"
+  // handleDeleteCardSubmit
+);
 
-const api = new Api({
-  baseUrl: "https://around-api.en.tripleten-services.com/v1",
-  headers: {
-    authorization: "71ef8ca1-b8c8-47e5-8d73-d71542ab18e9",
-    "Content-Type": "application/json",
-  },
-});
+deleteModal.setEventListeners();
