@@ -12,6 +12,8 @@ import PopupWithImage from "../components/PopupWithImage.js";
 
 import PopupWithForm from "../components/PopupWithForm.js";
 
+import PopupWithConfirmation from "../components/PopupWithConfirmation.js";
+
 import UserInfo from "../components/UserInfo.js";
 
 import Section from "../components/Section.js";
@@ -80,7 +82,10 @@ function createCard(data) {
 }
 
 function getCardElement(cardData) {
-  const card = new Card(cardData, "#card-template", handleImageClick);
+  const card = new Card(cardData, "#card-template", handleImageClick, () => {
+    deleteModal.open();
+    console.log(cardData);
+  });
   return card.getView();
 }
 
@@ -88,7 +93,7 @@ function handleImageClick(cardData) {
   imageModal.open(cardData);
 }
 
-// function handleDeleteCardSubmit(cardData) {}
+function handleDeleteCardSubmit(cardId) {}
 
 function handleAddCardFormSubmit(inputData) {
   const cardData = {
@@ -116,12 +121,11 @@ function handleProfileFormSubmit(userData) {
 function handleAvatarFormSubmit(avatarData) {
   avatarSaveButton.textContent = "Saving...";
   const avatar = avatarData["avatar URL"];
-  api.editUserAvatar(avatar);
-  setTimeout(() => {
+  api.editUserAvatar(avatar).then(() => {
     getProfileData();
     avatarModal.close();
     avatarSaveButton.textContent = "Save";
-  }, 1000);
+  });
 }
 
 function getProfileData() {
@@ -195,9 +199,9 @@ profileModal.setEventListeners();
 
 // Delete Card Modal
 
-const deleteModal = new PopupWithForm(
-  "#delete-card-modal"
-  // handleDeleteCardSubmit
+const deleteModal = new PopupWithConfirmation(
+  "#delete-card-modal",
+  handleDeleteCardSubmit
 );
 
 deleteModal.setEventListeners();
