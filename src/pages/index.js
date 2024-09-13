@@ -25,6 +25,8 @@ const editProfileModal = document.querySelector("#profile-modal");
 const editProfileForm = document.forms["edit-profile-form"];
 const addCardModal = document.querySelector("#add-card-modal");
 const addCardForm = document.forms["add-card-form"];
+const avatarForm = document.forms["avatar-form"];
+const editAvatarModal = document.querySelector("#avatar-modal");
 
 // Buttons
 
@@ -32,6 +34,8 @@ const addCardButton = document.querySelector(".profile__add-button");
 const addCardSaveButton = addCardModal.querySelector(".modal__button");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileSaveButton = editProfileModal.querySelector(".modal__button");
+const avatarSaveButton = avatarForm.querySelector(".modal__button");
+const editAvatarButton = document.querySelector(".profile__avatar");
 
 // Misc
 
@@ -102,11 +106,21 @@ function handleProfileFormSubmit(userData) {
   profileSaveButton.textContent = "Saving...";
   const title = userData.title;
   const description = userData.description;
-  api.editUserInfo(title, description);
-  setTimeout(() => {
+  api.editUserInfo(title, description).then(() => {
     getProfileData();
     profileModal.close();
     profileSaveButton.textContent = "Save";
+  });
+}
+
+function handleAvatarFormSubmit(avatarData) {
+  avatarSaveButton.textContent = "Saving...";
+  const avatar = avatarData["avatar URL"];
+  api.editUserAvatar(avatar);
+  setTimeout(() => {
+    getProfileData();
+    avatarModal.close();
+    avatarSaveButton.textContent = "Save";
   }, 1000);
 }
 
@@ -125,6 +139,10 @@ getProfileData();
 const userInfo = new UserInfo(profileTitle, profileDescription, profileAvatar);
 
 // Event Listeners
+
+editAvatarButton.addEventListener("click", () => {
+  avatarModal.open();
+});
 
 profileEditButton.addEventListener("click", () => {
   const userData = userInfo.getUserInfo();
@@ -145,9 +163,11 @@ const profileFormValidator = new FormValidator(
   validationSettings,
   editProfileForm
 );
+const avatarFormValidator = new FormValidator(validationSettings, avatarForm);
 
 addCardFormValidator.enableValidation();
 profileFormValidator.enableValidation();
+avatarFormValidator.enableValidation();
 
 // Image Modal
 
@@ -173,9 +193,17 @@ const profileModal = new PopupWithForm(
 
 profileModal.setEventListeners();
 
+// Delete Card Modal
+
 const deleteModal = new PopupWithForm(
   "#delete-card-modal"
   // handleDeleteCardSubmit
 );
 
 deleteModal.setEventListeners();
+
+// Avatar Modal
+
+const avatarModal = new PopupWithForm("#avatar-modal", handleAvatarFormSubmit);
+
+avatarModal.setEventListeners();
