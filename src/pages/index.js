@@ -64,15 +64,24 @@ const api = new Api({
 
 // Cards
 
-const section = new Section(
-  {
-    items: initialCards,
-    renderer: createCard,
-  },
-  ".cards__list"
-);
+let section;
 
-section.renderItems();
+api
+  .getInitialCards()
+  .then((cardDataArray) => {
+    section = new Section(
+      {
+        items: cardDataArray,
+        renderer: createCard,
+      },
+      ".cards__list"
+    );
+
+    section.renderItems();
+  })
+  .catch((err) => {
+    console.error("Error fetching initial cards:", err);
+  });
 
 // Event Handlers
 
@@ -81,10 +90,11 @@ function createCard(data) {
   section.addItem(cardElement);
 }
 
+let card;
+
 function getCardElement(cardData) {
-  const card = new Card(cardData, "#card-template", handleImageClick, () => {
+  card = new Card(cardData, "#card-template", handleImageClick, (card) => {
     deleteModal.open();
-    console.log(cardData);
   });
   return card.getView();
 }
@@ -100,11 +110,13 @@ function handleAddCardFormSubmit(inputData) {
   };
 
   newCardModal.setSaving(true);
-  createCard(cardData);
-  newCardModal.close();
-  addCardForm.reset();
-  addCardFormValidator.disableSubmitButton();
-  newCardModal.setSaving(false);
+  api.addNewCard(cardData).then((cardData) => {
+    createCard(cardData);
+    newCardModal.close();
+    addCardForm.reset();
+    addCardFormValidator.disableSubmitButton();
+    newCardModal.setSaving(false);
+  });
 }
 
 function handleProfileFormSubmit(userData) {
@@ -132,7 +144,29 @@ function handleAvatarFormSubmit(avatarData) {
   }
 }
 
-function handleDeleteCardSubmit(cardId) {}
+function handleDeleteCardSubmit() {
+  api
+    .deleteCard(card.getId())
+    .then(() => {
+      card.removeCard();
+      deleteModal.close();
+    })
+    .catch((err) => {
+      console.error("Error deleting card:", err);
+    });
+}
+
+function handleLikeCardClick() {
+  api
+    .likeCard(card.getId())
+    .then((cardData) => {
+      card.setLike();
+      card.updateLikeCounter(cardData.likes.length);
+    })
+    .catch((err) => {
+      console.error("Error liking card:", err);
+    });
+}
 
 function getProfileData() {
   return api.getUserInfo().then((profileData) => {
