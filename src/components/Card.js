@@ -1,12 +1,14 @@
 export default class Card {
   constructor(
-    { name, link },
+    { name, link, _id, isLiked },
     cardSelector,
     handleImageClick,
     handleDeleteCard
   ) {
     this._name = name;
     this._link = link;
+    this._id = _id;
+    this._likeStatus = isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
     this._handleDeleteCard = handleDeleteCard;
@@ -26,8 +28,6 @@ export default class Card {
   _handleLikeIcons() {
     this._heartButton.classList.toggle("card__heart-button-active");
   }
-
-  // _handleDeleteButton() {}
 
   _setEventListeners() {
     this._heartButton.addEventListener("click", () => {

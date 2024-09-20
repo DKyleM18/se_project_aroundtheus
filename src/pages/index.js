@@ -93,40 +93,46 @@ function handleImageClick(cardData) {
   imageModal.open(cardData);
 }
 
-function handleDeleteCardSubmit(cardId) {}
-
 function handleAddCardFormSubmit(inputData) {
   const cardData = {
     name: inputData.title,
     link: inputData["Image URL"],
   };
 
+  newCardModal.setSaving(true);
   createCard(cardData);
   newCardModal.close();
   addCardForm.reset();
   addCardFormValidator.disableSubmitButton();
+  newCardModal.setSaving(false);
 }
 
 function handleProfileFormSubmit(userData) {
-  profileSaveButton.textContent = "Saving...";
+  profileModal.setSaving(true);
   const title = userData.title;
   const description = userData.description;
   api.editUserInfo(title, description).then(() => {
     getProfileData();
     profileModal.close();
-    profileSaveButton.textContent = "Save";
+    profileModal.setSaving(false);
   });
 }
 
 function handleAvatarFormSubmit(avatarData) {
-  avatarSaveButton.textContent = "Saving...";
-  const avatar = avatarData["avatar URL"];
-  api.editUserAvatar(avatar).then(() => {
-    getProfileData();
-    avatarModal.close();
-    avatarSaveButton.textContent = "Save";
-  });
+  if (!avatarSaveButton.disabled) {
+    avatarModal.setSaving(true);
+    const avatar = avatarData["avatar URL"];
+    api.editUserAvatar(avatar).then(() => {
+      getProfileData();
+      avatarModal.close();
+      avatarModal.setSaving(false);
+      avatarForm.reset();
+      avatarFormValidator.disableSubmitButton();
+    });
+  }
 }
+
+function handleDeleteCardSubmit(cardId) {}
 
 function getProfileData() {
   return api.getUserInfo().then((profileData) => {
