@@ -7,6 +7,10 @@ export default class PopupWithForm extends Popup {
     this._handleFormSubmit = handleFormSubmit;
   }
 
+  setHandleFormSubmit(func) {
+    this._handleFormSubmit = func;
+  }
+
   setEventListeners() {
     // add a submit event listener to the form
     this._modalForm.addEventListener("submit", (evt) => {

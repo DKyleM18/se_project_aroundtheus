@@ -90,44 +90,50 @@ function createCard(data) {
   section.addItem(cardElement);
 }
 
-let card;
-
 function getCardElement(cardData) {
-  card = new Card(
+  const card = new Card(
     cardData,
     "#card-template",
     handleImageClick,
     (card) => {
       deleteModal.open();
+      deleteModal.setHandleFormSubmit(() => {
+        api
+          .deleteCard(card.getId())
+          .then(() => {
+            card.removeCard();
+            deleteModal.close();
+          })
+          .catch((err) => {
+            console.error("Error deleting card:", err);
+          });
+      });
+      console.log("Delete card:", cardData, card);
     },
-    handleIsLiked
+    (id, card) => {
+      if (card.getLikeStatus()) {
+        return api
+          .dislikeCard(id)
+          .then(() => {
+            card.toggleLikeIcons();
+          })
+          .catch((err) => {
+            console.error("Error disliking card:", err);
+          });
+      } else {
+        return api
+          .likeCard(id)
+          .then(() => {
+            card.toggleLikeIcons();
+          })
+          .catch((err) => {
+            console.error("Error liking card:", err);
+          });
+      }
+    }
   );
+  card.setLike();
   return card.getView();
-}
-
-function handleIsLiked(cardData) {
-  if (!cardData.getLikeStatus(true)) {
-    api
-      .likeCard(cardData.getId())
-      .then(() => {
-        console.log("Liked card:", cardData);
-        card.toggleLikeIcons();
-      })
-      .catch((err) => {
-        console.error("Error liking card:", err);
-      });
-  } else {
-    api
-      .dislikeCard(cardData.getId())
-      .then(() => {
-        console.log("Disliked card:", cardData);
-
-        card.toggleLikeIcons();
-      })
-      .catch((err) => {
-        console.error("Error disliking card:", err);
-      });
-  }
 }
 
 function handleImageClick(cardData) {
@@ -177,7 +183,7 @@ function handleAvatarFormSubmit(avatarData) {
   }
 }
 
-function handleDeleteCardSubmit() {
+function handleDeleteCardSubmit(card) {
   api
     .deleteCard(card.getId())
     .then(() => {

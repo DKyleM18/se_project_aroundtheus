@@ -28,7 +28,9 @@ export default class Card {
   }
 
   getLikeStatus() {
-    return this._heartButton.classList.contains("card__heart-button-active");
+    return this._heartButton.classList.contains("card__heart-button-active")
+      ? true
+      : false;
   }
 
   toggleLikeIcons() {
@@ -36,17 +38,31 @@ export default class Card {
   }
 
   _setEventListeners() {
-    this._heartButton.addEventListener("click", this._handleIsLiked);
+    this._heartButton.addEventListener("click", () => {
+      this._handleIsLiked(this._id, this);
+    });
 
-    this._deleteButton.addEventListener("click", this._handleDeleteCard);
+    this._deleteButton.addEventListener("click", this._handleDeleteClick);
 
     this._cardImage.addEventListener("click", () => {
       this._handleImageClick({ name: this._name, link: this._link });
     });
   }
 
+  _handleDeleteClick = () => {
+    this._handleDeleteCard(this);
+  };
+
   getId() {
     return this._id;
+  }
+
+  setLike() {
+    if (this._likeStatus === true) {
+      this._heartButton.classList.add("card__heart-button-active");
+    } else {
+      this._heartButton.classList.remove("card__heart-button-active");
+    }
   }
 
   removeCard() {
