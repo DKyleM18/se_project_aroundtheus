@@ -149,37 +149,58 @@ function handleAddCardFormSubmit(inputData) {
   };
 
   newCardModal.setSaving(true);
-  api.addNewCard(cardData).then((cardData) => {
-    createCard(cardData);
-    newCardModal.close();
-    addCardForm.reset();
-    addCardFormValidator.disableSubmitButton();
-    newCardModal.setSaving(false);
-  });
+  api
+    .addNewCard(cardData)
+    .then((cardData) => {
+      createCard(cardData);
+      newCardModal.close();
+      addCardForm.reset();
+      addCardFormValidator.disableSubmitButton();
+    })
+    .catch((err) => {
+      console.error("Error adding new card:", err);
+    })
+    .finally(() => {
+      newCardModal.setSaving(false);
+    });
 }
 
 function handleProfileFormSubmit(userData) {
   profileModal.setSaving(true);
   const title = userData.title;
   const description = userData.description;
-  api.editUserInfo(title, description).then(() => {
-    getProfileData();
-    profileModal.close();
-    profileModal.setSaving(false);
-  });
+  api
+    .editUserInfo(title, description)
+    .then((profileData) => {
+      userInfo.setUserInfo(profileData["name"], profileData["about"]);
+      profileModal.close();
+    })
+    .catch((err) => {
+      console.error("Error editing user info:", err);
+    })
+    .finally(() => {
+      profileModal.setSaving(false);
+    });
 }
 
 function handleAvatarFormSubmit(avatarData) {
   if (!avatarSaveButton.disabled) {
     avatarModal.setSaving(true);
     const avatar = avatarData["avatar URL"];
-    api.editUserAvatar(avatar).then(() => {
-      getProfileData();
-      avatarModal.close();
-      avatarModal.setSaving(false);
-      avatarForm.reset();
-      avatarFormValidator.disableSubmitButton();
-    });
+    api
+      .editUserAvatar(avatar)
+      .then(() => {
+        userInfo.setUserAvatar(avatar);
+        avatarModal.close();
+        avatarForm.reset();
+        avatarFormValidator.disableSubmitButton();
+      })
+      .catch((err) => {
+        console.error("Error editing user avatar:", err);
+      })
+      .finally(() => {
+        avatarModal.setSaving(false);
+      });
   }
 }
 
@@ -195,25 +216,10 @@ function handleDeleteCardSubmit(card) {
     });
 }
 
-function handleLikeCardClick() {
-  api
-    .likeCard(card.getId())
-    .then((cardData) => {
-      card.setLike();
-      card.updateLikeCounter(cardData.likes.length);
-    })
-    .catch((err) => {
-      console.error("Error liking card:", err);
-    });
-}
-
 function getProfileData() {
   return api.getUserInfo().then((profileData) => {
-    userInfo.setUserInfo(
-      profileData["name"],
-      profileData["about"],
-      profileData["avatar"]
-    );
+    userInfo.setUserInfo(profileData["name"], profileData["about"]);
+    userInfo.setUserAvatar(profileData["avatar"]);
   });
 }
 

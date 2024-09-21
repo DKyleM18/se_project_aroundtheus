@@ -9,9 +9,7 @@ export default class Api {
   getUserInfo() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .then((res) => res);
+    }).then(this._checkResponse);
   }
 
   editUserInfo(name, about) {
@@ -22,9 +20,7 @@ export default class Api {
         name: name,
         about: about,
       }),
-    })
-      .then(this._checkResponse)
-      .then((res) => res);
+    }).then(this._checkResponse);
   }
 
   editUserAvatar(avatar) {
@@ -34,17 +30,13 @@ export default class Api {
       body: JSON.stringify({
         avatar: avatar,
       }),
-    })
-      .then(this._checkResponse)
-      .then((res) => res);
+    }).then(this._checkResponse);
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .then((res) => res);
+    }).then(this._checkResponse);
   }
 
   addNewCard(data) {
@@ -55,36 +47,28 @@ export default class Api {
         name: data.name,
         link: data.link,
       }),
-    })
-      .then(this._checkResponse)
-      .then((res) => res);
+    }).then(this._checkResponse);
   }
 
   deleteCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .then((res) => res);
+    }).then(this._checkResponse);
   }
 
   likeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .then((res) => res);
+    }).then(this._checkResponse);
   }
 
   dislikeCard(cardId) {
     return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
       headers: this._headers,
-    })
-      .then(this._checkResponse)
-      .then((res) => res);
+    }).then(this._checkResponse);
   }
 
   getInitialData() {
