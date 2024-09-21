@@ -1,9 +1,19 @@
 export default class Card {
-  constructor({ name, link }, cardSelector, handleImageClick) {
+  constructor(
+    { name, link, _id, isLiked },
+    cardSelector,
+    handleImageClick,
+    handleDeleteCard,
+    handleIsLiked
+  ) {
     this._name = name;
     this._link = link;
+    this._id = _id;
+    this._likeStatus = isLiked;
     this._cardSelector = cardSelector;
     this._handleImageClick = handleImageClick;
+    this._handleDeleteCard = handleDeleteCard;
+    this._handleIsLiked = handleIsLiked;
     const cardTemplate = document
       .querySelector(this._cardSelector)
       .content.querySelector(".card");
@@ -17,27 +27,47 @@ export default class Card {
     this._cardTitle = this._cardElement.querySelector(".card__title");
   }
 
-  _handleLikeIcons() {
-    this._heartButton.classList.toggle("card__heart-button-active");
+  getLikeStatus() {
+    return this._heartButton.classList.contains("card__heart-button-active")
+      ? true
+      : false;
   }
 
-  _handleDeleteButton() {
-    this._cardElement.remove();
-    this._cardElement = null;
+  toggleLikeIcons() {
+    this._heartButton.classList.toggle("card__heart-button-active");
   }
 
   _setEventListeners() {
     this._heartButton.addEventListener("click", () => {
-      this._handleLikeIcons();
+      this._handleIsLiked(this._id, this);
     });
 
-    this._deleteButton.addEventListener("click", () => {
-      this._handleDeleteButton();
-    });
+    this._deleteButton.addEventListener("click", this._handleDeleteClick);
 
     this._cardImage.addEventListener("click", () => {
       this._handleImageClick({ name: this._name, link: this._link });
     });
+  }
+
+  _handleDeleteClick = () => {
+    this._handleDeleteCard(this);
+  };
+
+  getId() {
+    return this._id;
+  }
+
+  setLike() {
+    if (this._likeStatus === true) {
+      this._heartButton.classList.add("card__heart-button-active");
+    } else {
+      this._heartButton.classList.remove("card__heart-button-active");
+    }
+  }
+
+  removeCard() {
+    this._cardElement.remove();
+    this._cardElement = null;
   }
 
   getView() {

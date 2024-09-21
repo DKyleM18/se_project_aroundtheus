@@ -23,19 +23,22 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <img
-            src="<%= require('./images/jacques-cousteau.png')%>"
-            alt="Jacques Cousteau avatar"
-            class="profile__avatar"
-          />
+          <div class="profile__avatar-container">
+            <img src="" alt="profile avatar" class="profile__avatar" />
+            <button
+              aria-label="edit avatar button"
+              type="button"
+              class="profile__edit-avatar-button"
+            ></button>
+          </div>
           <div class="profile__info">
-            <h1 class="profile__title">Jacques Cousteau</h1>
+            <h1 class="profile__title"></h1>
             <button
               aria-label="edit button"
               type="button"
               class="profile__edit-button"
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description"></p>
           </div>
           <button
             aria-label="add button"
@@ -144,6 +147,61 @@
         ></button>
         <img src="" alt="" class="modal__image" />
         <p class="modal__image-title"></p>
+      </div>
+    </div>
+    <!-- Delete Card Modal -->
+    <div class="modal modal_type_delete" id="delete-card-modal">
+      <div class="modal__container modal__container_type_delete">
+        <button
+          aria-label="close"
+          class="modal__close modal__close_type_delete"
+        ></button>
+        <h3 class="modal__heading modal__heading_type_delete">Are you sure?</h3>
+        <form
+          class="modal__form modal__form_type_delete"
+          name="delete-card-form"
+          id="delete-card-form"
+          novalidate
+        >
+          <button class="modal__button modal__button_type_delete" type="submit">
+            Yes
+          </button>
+        </form>
+      </div>
+    </div>
+    <!-- Avatar Modal -->
+    <div class="modal modal_type_avatar" id="avatar-modal">
+      <div class="modal__container modal__container_type_avatar">
+        <button
+          aria-label="close"
+          class="modal__close modal__close_type_avatar"
+        ></button>
+        <h3 class="modal__heading modal__heading_type_avatar">
+          Change profile picture
+        </h3>
+        <form
+          class="modal__form modal__form_type_avatar"
+          name="avatar-form"
+          id="avatar-form"
+          novalidate
+        >
+          <input
+            class="modal__form-input modal__form-input_type_avatar"
+            id="avatar-input"
+            type="url"
+            name="avatar URL"
+            placeholder="https://somewebsite.com/someimage.jpg"
+            required
+          />
+          <span class="modal__form-input-error avatar-input-error"></span>
+          <button
+            class="modal__button modal__button_disabled"
+            type="submit"
+            disabled
+          >
+            Save
+          </button>
+        </form>
       </div>
     </div>
     <!-- Card Template -->
