@@ -37,7 +37,7 @@ const addCardSaveButton = addCardModal.querySelector(".modal__button");
 const profileEditButton = document.querySelector(".profile__edit-button");
 const profileSaveButton = editProfileModal.querySelector(".modal__button");
 const avatarSaveButton = avatarForm.querySelector(".modal__button");
-const editAvatarButton = document.querySelector(".profile__avatar");
+const editAvatarButton = document.querySelector(".profile__avatar-container");
 
 // Misc
 
@@ -93,13 +93,46 @@ function createCard(data) {
 let card;
 
 function getCardElement(cardData) {
-  card = new Card(cardData, "#card-template", handleImageClick, (card) => {
-    deleteModal.open();
-  });
+  card = new Card(
+    cardData,
+    "#card-template",
+    handleImageClick,
+    (card) => {
+      deleteModal.open();
+    },
+    handleIsLiked
+  );
   return card.getView();
 }
 
+function handleIsLiked(cardData) {
+  if (!cardData.getLikeStatus(true)) {
+    api
+      .likeCard(cardData.getId())
+      .then(() => {
+        console.log("Liked card:", cardData);
+        card.toggleLikeIcons();
+      })
+      .catch((err) => {
+        console.error("Error liking card:", err);
+      });
+  } else {
+    api
+      .dislikeCard(cardData.getId())
+      .then(() => {
+        console.log("Disliked card:", cardData);
+
+        card.toggleLikeIcons();
+      })
+      .catch((err) => {
+        console.error("Error disliking card:", err);
+      });
+  }
+}
+
 function handleImageClick(cardData) {
+  console.log(cardData);
+
   imageModal.open(cardData);
 }
 

@@ -27,14 +27,16 @@ export default class Card {
     this._cardTitle = this._cardElement.querySelector(".card__title");
   }
 
-  _handleLikeIcons() {
+  getLikeStatus() {
+    return this._heartButton.classList.contains("card__heart-button-active");
+  }
+
+  toggleLikeIcons() {
     this._heartButton.classList.toggle("card__heart-button-active");
   }
 
   _setEventListeners() {
-    this._heartButton.addEventListener("click", () => {
-      this._handleLikeIcons();
-    });
+    this._heartButton.addEventListener("click", this._handleIsLiked);
 
     this._deleteButton.addEventListener("click", this._handleDeleteCard);
 
